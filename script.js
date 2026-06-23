@@ -22,6 +22,13 @@ document.getElementById("closeModal").onclick = () => {
   frame.src = "";
 };
 
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    modal.classList.add("hidden");
+    frame.src = "";
+  }
+});
+
 // SCROLL REVEAL
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry, index) => {
