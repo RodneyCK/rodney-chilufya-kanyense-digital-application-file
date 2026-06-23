@@ -578,6 +578,10 @@ body::before {
   padding: 10px 20px;
 }
 
+.modal {
+  isolation: isolate;
+}
+
 
 
 
