@@ -7,42 +7,55 @@ document.querySelectorAll("[data-toggle]").forEach(el => {
 });
 
 // CERTIFICATE MODAL
+// CERTIFICATE MODAL (FIXED NAVIGATION)
+
 const modal = document.getElementById("modal");
 const frame = document.getElementById("frame");
 
+// OPEN MODAL + add history support (mobile back button works)
 document.querySelectorAll("[data-cert]").forEach(el => {
   el.addEventListener("click", () => {
     frame.src = el.dataset.cert;
     modal.classList.remove("hidden");
+
+    history.pushState({ modalOpen: true }, "");
   });
 });
 
-document.getElementById("closeModal").onclick = () => {
-  modal.classList.add("hidden");
-  frame.src = "";
-};
-
-modal.addEventListener("click", (e) => {
-  if (e.target === modal) {
-    modal.classList.add("hidden");
-    frame.src = "";
-  }
-});
-
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    modal.classList.add("hidden");
-    frame.src = "";
-  }
-});
-
+// CLOSE FUNCTION (reuse everywhere)
 function closeModal() {
   modal.classList.add("hidden");
   frame.src = "";
+
+  if (history.state && history.state.modalOpen) {
+    history.back();
+  }
 }
 
+// CLOSE BUTTON
 document.getElementById("closeModal").onclick = closeModal;
 
+// CLICK OUTSIDE MODAL TO CLOSE (DESKTOP FIX)
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    closeModal();
+  }
+});
+
+// ESC KEY CLOSE (DESKTOP UX STANDARD)
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closeModal();
+  }
+});
+
+// BACK BUTTON SUPPORT (MOBILE + DESKTOP)
+window.addEventListener("popstate", () => {
+  if (!modal.classList.contains("hidden")) {
+    modal.classList.add("hidden");
+    frame.src = "";
+  }
+});
 
 
 
