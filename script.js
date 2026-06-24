@@ -22,13 +22,6 @@ document.getElementById("closeModal").onclick = () => {
   frame.src = "";
 };
 
-modal.addEventListener("click", (e) => {
-  if (e.target === modal) {
-    modal.classList.add("hidden");
-    frame.src = "";
-  }
-});
-
 // SCROLL REVEAL
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry, index) => {
@@ -67,3 +60,39 @@ window.addEventListener("scroll", () => {
     }
   });
 });
+
+// ROTATING ROLE
+
+const roleElement = document.getElementById("changing-role");
+
+if (roleElement) {
+
+  const roles = [
+    "IT Engineer",
+    "Digital Consultant",
+    "Systems Developer",
+    "Administrative Manager",
+    "IT Support Specialist",
+    "5+ years of experience",
+  ];
+
+  let roleIndex = 0;
+
+  setInterval(() => {
+
+    roleElement.style.opacity = 0;
+    roleElement.style.transform = "translateY(6px)";
+
+    setTimeout(() => {
+
+      roleIndex = (roleIndex + 1) % roles.length;
+      roleElement.textContent = roles[roleIndex];
+
+      roleElement.style.opacity = 1;
+      roleElement.style.transform = "translateY(0px)";
+
+    }, 200);
+
+  }, 2500);
+
+}
