@@ -22,6 +22,32 @@ document.getElementById("closeModal").onclick = () => {
   frame.src = "";
 };
 
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    modal.classList.add("hidden");
+    frame.src = "";
+  }
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    modal.classList.add("hidden");
+    frame.src = "";
+  }
+});
+
+function closeModal() {
+  modal.classList.add("hidden");
+  frame.src = "";
+}
+
+document.getElementById("closeModal").onclick = closeModal;
+
+
+
+
+
+
 // SCROLL REVEAL
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry, index) => {

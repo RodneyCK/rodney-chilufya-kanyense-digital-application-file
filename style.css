@@ -868,6 +868,14 @@ text-align: center;
   }
 }
 
+.modal {
+  cursor: pointer;
+}
+
+.modal-content {
+  cursor: default;
+}
+
 
 
 
